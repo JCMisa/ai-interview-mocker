@@ -25,6 +25,7 @@ const RecordAnswerSection = ({
     results,
     startSpeechToText,
     stopSpeechToText,
+    setResults,
   } = useSpeechToText({
     continuous: true,
     useLegacyResults: false,
@@ -95,13 +96,16 @@ const RecordAnswerSection = ({
     });
 
     if (resp) {
+      // checks if the record was added to the UserAnswer table
       toast(
         <div className="text-green-500 text-sm">
           User answer saved successfully!
         </div>
       );
+      setUserAnswer(""); // make the userAnswer state empty again
+      setResults([]); // set the result transcript array to and empty array
     }
-    setUserAnswer("");
+    setResults([]);
     setLoading(false);
   };
 
