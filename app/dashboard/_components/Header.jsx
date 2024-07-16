@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className="flex p-4 items-center justify-between bg-secondary shadow-md">
       <div className="flex gap-2 items-center">
-        <Image src={"/logo.svg"} width={40} height={20} alt="logo" />
+        <Image src={"/logo.svg"} width={40} height={20} alt="main logo" />
         <p className="font-bold text-lg text-primary">AIIM</p>
       </div>
 

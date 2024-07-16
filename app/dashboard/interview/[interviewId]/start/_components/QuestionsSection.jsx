@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Lightbulb, Volume1, Volume2 } from "lucide-react";
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 const QuestionsSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
   const [speaking, setSpeaking] = useState(false);
@@ -17,7 +18,7 @@ const QuestionsSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
         setSpeaking(false);
       }, 10000);
     } else {
-      alert("Sorry, your browser does not support text to speech");
+      toast("Sorry, your browser does not support text to speech");
     }
   };
 
@@ -31,8 +32,9 @@ const QuestionsSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
           {mockInterviewQuestion &&
             mockInterviewQuestion.map((question, index) => (
               <h2
+                key={index}
                 className={`p-2 bg-secondary rounded-full text-xs md:text-sm text-center cursor-pointer ${
-                  activeQuestionIndex === index && "bg-[#332e93] text-white"
+                  activeQuestionIndex == index ? "bg-gray-950 text-white" : ""
                 }`}
               >
                 Question #{index + 1}
