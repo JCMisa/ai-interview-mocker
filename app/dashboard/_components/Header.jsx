@@ -2,10 +2,13 @@
 
 import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 const Header = () => {
+  const router = useRouter();
+
   const path = usePathname(); //returns the path of this component which is /dashboard
 
   useEffect(() => {}, []);
@@ -21,20 +24,24 @@ const Header = () => {
           className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
             path === "/dashboard" && "text-primary font-bold"
           }`}
+          onClick={() => router.push("/dashboard")}
         >
           Dashboard
         </li>
-        <li
-          className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
-            path === "/dashboard/questions" && "text-primary font-bold"
-          }`}
-        >
-          Questions
-        </li>
+        <Link href={"https://jcmisa-portfolio.vercel.app/"} target="_blank">
+          <li
+            className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
+              path === "/dashboard/questions" && "text-primary font-bold"
+            }`}
+          >
+            Contact
+          </li>
+        </Link>
         <li
           className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
             path === "/dashboard/upgrade" && "text-primary font-bold"
           }`}
+          onClick={() => router.push("/dashboard/upgrade")}
         >
           Upgrade
         </li>

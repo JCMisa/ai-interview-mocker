@@ -34,6 +34,7 @@ const RecordAnswerSection = ({
   const [userAnswer, setUserAnswer] = useState("");
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
+  const [webcamEnabled, setWebcamEnabled] = useState(false);
 
   useEffect(() => {
     results.map(
@@ -112,20 +113,26 @@ const RecordAnswerSection = ({
   return (
     <div className="flex justify-center items-center flex-col">
       <div className="flex flex-col justify-center items-center bg-violet-300 rounded-lg p-5 mt-20">
-        <Image
-          src={"/webcam.png"}
-          width={300}
-          height={300}
-          className="absolute"
-        />
-        <Webcam
-          mirrored={true}
-          style={{
-            height: 300,
-            width: "100%",
-            zIndex: 10,
-          }}
-        />
+        {webcamEnabled ? (
+          <Webcam
+            onUserMedia={() => setWebcamEnabled(true)}
+            onUserMediaError={() => setWebcamEnabled(false)}
+            mirrored={true}
+            style={{
+              height: 300,
+              width: "100%",
+              zIndex: 10,
+            }}
+          />
+        ) : (
+          <Image
+            src={"/webcam.png"}
+            width={300}
+            height={300}
+            className="absolute cursor-pointer"
+            onClick={() => setWebcamEnabled(true)}
+          />
+        )}
       </div>
 
       <div className="flex flex-row gap-2 justify-between">
