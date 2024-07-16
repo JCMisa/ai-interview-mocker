@@ -49,8 +49,9 @@ export default function Page() {
             </h2>
 
             <p className="mt-4 leading-relaxed text-white/90">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-              nam dolorum aliquam, quibusdam aperiam voluptatum.
+              Leverage the Power of Gemini API for a Pool of Realistic Interview
+              Questions and Practice Like a Pro with Camera, Microphone, and
+              Speech-to-Text Technology.
             </p>
           </div>
         </section>
@@ -81,8 +82,9 @@ export default function Page() {
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
+                Leverage the Power of Gemini API for a Pool of Realistic
+                Interview Questions and Practice Like a Pro with Camera,
+                Microphone, and Speech-to-Text Technology.
               </p>
             </div>
 
