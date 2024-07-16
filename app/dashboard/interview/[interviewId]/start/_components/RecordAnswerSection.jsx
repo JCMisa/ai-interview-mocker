@@ -16,7 +16,7 @@ import moment from "moment";
 const RecordAnswerSection = ({
   mockInterviewQuestion,
   activeQuestionIndex,
-  interviewData,
+  interviewData, // it was the record found by mockId in page.jsx of start directory
 }) => {
   const {
     error,
@@ -35,13 +35,14 @@ const RecordAnswerSection = ({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    results.map((result) =>
-      setUserAnswer((prevAns) => prevAns + result?.transcript)
+    results.map(
+      (result) => setUserAnswer((prevAns) => prevAns + result?.transcript) // append the result transcript to the empty string of userAnswer state
     );
   }, [results]);
 
   useEffect(() => {
     if (!isRecording && userAnswer.length > 10) {
+      // it means the user is not recording and the userAnswer state is not empty string
       UpdateUserAnswer();
     }
     // if (userAnswer?.length < 10) {
@@ -55,6 +56,7 @@ const RecordAnswerSection = ({
     // }
   }, [userAnswer]);
 
+  // this is the method the checks if the device is recording then stop it on click, otherwise start recording
   const StartStopRecording = async () => {
     if (isRecording) {
       stopSpeechToText();
@@ -79,15 +81,15 @@ const RecordAnswerSection = ({
     // console.log("Feedback Response: ", JSON.parse(mockJsonResp));
     console.log(mockJsonResp);
 
-    const JsonFeedbackResp = JSON.parse(mockJsonResp);
+    const JsonFeedbackResp = JSON.parse(mockJsonResp); // store the object response of the gemini api that has feedback and rating properties
 
     const resp = await db.insert(UserAnswer).values({
-      mockIdRef: interviewData?.mockId,
+      mockIdRef: interviewData?.mockId, // this is the mockId from the interviewData which is found by id in page.jsx of start directory
       question: mockInterviewQuestion[activeQuestionIndex]?.question,
       correctAns: mockInterviewQuestion[activeQuestionIndex]?.answer,
-      userAns: userAnswer,
-      feedback: JsonFeedbackResp?.feedback,
-      rating: JsonFeedbackResp?.rating,
+      userAns: userAnswer, // this is the record transcript appended to the userAnswer empty string state
+      feedback: JsonFeedbackResp?.feedback, // accessing the feedback property of the gemini api response
+      rating: JsonFeedbackResp?.rating, // accessing the rating property of the gemini api response
       userEmail: user?.primaryEmailAddress?.emailAddress,
       createdAt: moment().format("DD-MM-yyyy"),
     });

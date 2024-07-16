@@ -29,17 +29,16 @@ const QuestionsSection = ({ mockInterviewQuestion, activeQuestionIndex }) => {
           className="grid grid-cols-2 md:gridcol3
        lg:grid-cols-4 gap-5"
         >
-          {mockInterviewQuestion &&
-            mockInterviewQuestion.map((question, index) => (
-              <h2
-                key={index}
-                className={`p-2 bg-secondary rounded-full text-xs md:text-sm text-center cursor-pointer ${
-                  activeQuestionIndex == index ? "bg-gray-950 text-white" : ""
-                }`}
-              >
-                Question #{index + 1}
-              </h2>
-            ))}
+          {mockInterviewQuestion.map((question, index) => (
+            <h2
+              key={index}
+              className={`p-2 bg-secondary rounded-full text-xs md:text-sm text-center cursor-pointer ${
+                activeQuestionIndex == index && "text-primary"
+              }`}
+            >
+              Question #{index + 1}
+            </h2>
+          ))}
         </div>
         <h2 className="my-5 text-sm md:text-lg">
           {/* access the

@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
 import QuestionsSection from "./_components/QuestionsSection";
 import RecordAnswerSection from "./_components/RecordAnswerSection";
+import { Button } from "@/components/ui/button";
 
 const StartInterview = ({ params }) => {
   const [interviewData, setInterviewData] = useState();
@@ -22,7 +23,7 @@ const StartInterview = ({ params }) => {
     const jsonMockResp = JSON.parse(result[0].jsonMockResp); // this will set the jsonMockResp property which is the array of generated response from gemini to a variable
     console.log("jsonMockResp property: ", jsonMockResp);
     setMockInterviewQuestion(jsonMockResp); // the variable jsonMockResp will then be stored in mockInterviewQuestion state variable
-    setInterviewData(result[0]); // the whole record rith mockId equal to params interviewId will be stored in interviewData state variable
+    setInterviewData(result[0]); // the whole record with mockId equal to params interviewId will be stored in interviewData state variable
   };
 
   useEffect(() => {
@@ -34,16 +35,37 @@ const StartInterview = ({ params }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* questions */}
         <QuestionsSection
-          mockInterviewQuestion={mockInterviewQuestion}
-          activeQuestionIndex={activeQuestionIndex}
+          mockInterviewQuestion={mockInterviewQuestion} // this is the array that consist of objects with question and answer properties
+          activeQuestionIndex={activeQuestionIndex} // this is the index of the question that is active
         />
 
         {/* video/audio recording */}
         <RecordAnswerSection
-          mockInterviewQuestion={mockInterviewQuestion}
-          activeQuestionIndex={activeQuestionIndex}
-          interviewData={interviewData}
+          mockInterviewQuestion={mockInterviewQuestion} // this is the array that consist of objects with question and answer properties
+          activeQuestionIndex={activeQuestionIndex} // this is the index of the question that is active
+          interviewData={interviewData} // this is the state that store the found record based on the id in the params
         />
+      </div>
+
+      <div className="flex justify-end gap-6 mb-5">
+        {activeQuestionIndex > 0 && (
+          <Button
+            onClick={() => setactiveQuestionIndex(activeQuestionIndex - 1)} // decrement the index of the active question
+            className="bg-gray-500"
+          >
+            Previous Question
+          </Button>
+        )}
+        {activeQuestionIndex != mockInterviewQuestion?.length - 1 && (
+          <Button
+            onClick={() => setactiveQuestionIndex(activeQuestionIndex + 1)} // increment the index of the active question
+          >
+            Next Question
+          </Button>
+        )}
+        {activeQuestionIndex == mockInterviewQuestion?.length - 1 && (
+          <Button className="bg-destructive">End Question</Button>
+        )}
       </div>
     </div>
   );
